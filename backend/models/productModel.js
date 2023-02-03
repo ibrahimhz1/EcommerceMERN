@@ -47,7 +47,7 @@ const productSchema = new mongoose.Schema({
     reviews: [
         {
             name: {
-                type: Number,
+                type: String,
                 required: true,
             },
             rating: {
@@ -65,6 +65,6 @@ const productSchema = new mongoose.Schema({
         default: Date.now
     }
 
-})
+});
 
 module.exports = mongoose.model("Product", productSchema);
