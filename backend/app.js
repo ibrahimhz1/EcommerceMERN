@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 
+// Middleware Imports
+const errorMiddleware = require('./middleware/error');
+
 // express app using json
 app.use(express.json());
 
@@ -9,6 +12,15 @@ const product = require('./routes/productRoute');
 
 // Assigning Routes
 app.use("/api/", product);
+
+
+// MiddleWare for Error
+app.use(errorMiddleware)
+
+
+
+
+
 
 
 
@@ -26,10 +38,6 @@ app.get("/contact", (req, res)=> {
 app.get("*", (req, res)=> {
     res.status(500).send("<h1>Error page : U visited the wrong endpoint</h1>")
 });
-
-
-
-
 
 
 module.exports = app;
