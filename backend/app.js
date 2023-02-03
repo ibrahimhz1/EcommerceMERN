@@ -1,7 +1,14 @@
 const express = require('express');
 const app = express();
 
+// express app using json
+app.use(express.json());
 
+// Routes Imports
+const product = require('./routes/productRoute');
+
+// Assigning Routes
+app.use("/api/", product);
 
 
 

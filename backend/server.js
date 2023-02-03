@@ -5,10 +5,9 @@ const dotenv = require('dotenv');
 // dotenv config
 dotenv.config({path: "backend/config/config.env"});
 
-
-
-
-
+// Database Imports
+const connectDatabase = require('./config/dbconfig');
+connectDatabase();
 
 
 
