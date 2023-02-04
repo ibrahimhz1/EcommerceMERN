@@ -1,11 +1,20 @@
-// Product Model Import
-const Product = require('../models/productModel');
-
 // ErrorHandler Utility Import
 const ErrorHandler = require('../utils/errorHandler');
 
 // CatchAsyncErrors Middleware Import
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
+
+// Product Model Import
+const Product = require('../models/productModel');
+
+
+// Api Feature Imports
+const ApiFeatures = require('../utils/apiFeatures');
+
+
+
+
+
 
 // Create Product -- Admin
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
@@ -15,18 +24,29 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
         success: true,
         product
     })
-})
+});
 
-// Get All Products
+// Get All Products 
 exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
+    const resultPerPage = 5;
+    const productCount = await Product.countDocuments();
 
-    const products = await Product.find();
+    // const products = await Product.find();
+
+    const apiFeature = new ApiFeatures(Product.find(), req.query)
+    .search()
+    .filter()
+    .pagination(resultPerPage)
+
+    const products = await apiFeature.query;
 
     res.status(200).json({
         success: true,
-        products
+        products,
+        productCount
     });
-})
+
+});
 
 // Get Single Product Details
 exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
@@ -49,7 +69,7 @@ exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
     })
 })
 
-// Update Product
+// Update Product --Admin
 exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
     const product = await Product.findById(req.params.id);
     // if (!product) {
@@ -75,6 +95,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
     });
 })
 
+// Delete Product --Admin
 exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
     const product = await Product.findById(req.params.id);
     // if (!product) {
