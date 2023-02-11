@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cookieParser = require("cookie-parser");
 
 // Middleware Imports
 const errorMiddleware = require('./middleware/error');
@@ -7,15 +8,20 @@ const errorMiddleware = require('./middleware/error');
 // express app using json
 app.use(express.json());
 
+// express app using cookie-parser
+app.use(cookieParser());
+
+
 // Routes Imports
 const product = require('./routes/productRoute');
+const user = require('./routes/userRoute');
 
 // Assigning Routes
-app.use("/api/", product);
-
+app.use("/api", product);
+app.use("/api", user);
 
 // MiddleWare for Error
-app.use(errorMiddleware)
+app.use(errorMiddleware);
 
 
 
