@@ -1,11 +1,37 @@
-import { useState } from 'react'
+import React, { useEffect } from "react";
 
-function App() {
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// Layouts Components Imports
+import Header from "./components/layouts/Header/Header";
+import Footer from "./components/layouts/Footer/Footer";
+
+// Pages
+import Home from "./components/pages/Home/Home";
+
+// import web font loader
+import WebFont from "webfontloader";
+
+
+const App = () => {
+  // UseEffect for Fonts
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ["Roboto", "Droid Sans", "Chilanka"]
+      }
+    })
+  }, []);
 
   return (
-    <div className="App">
-      <h1>Viet server started</h1>
-    </div>
+    <Router>
+      <Header />
+      <Routes>
+        <Route exact path="/" element={<Home/ >} />
+
+      </Routes>
+      <Footer />
+    </Router>
   )
 }
 
