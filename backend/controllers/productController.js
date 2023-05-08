@@ -124,7 +124,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
         success: true,
         message: "Product Deleted Successfully"
     })
-})
+});
 
 // Create New Review or Update the review
 exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
@@ -214,7 +214,3 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
         message: "Review Deleted Successfully"
     });
 });
-
-
-
-

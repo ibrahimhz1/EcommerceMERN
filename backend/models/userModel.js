@@ -59,7 +59,7 @@ userSchema.pre("save", async function (next) {
 userSchema.methods.getJWTToken = function () {
     return jsonWebToken.sign({ id: this._id }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRE,
-    })
+    });
 }
 
 // Compare Password
